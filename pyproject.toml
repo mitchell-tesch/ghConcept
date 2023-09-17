@@ -1,0 +1,5 @@
+[project]
+name = "gh_concept"
+dependencies = [
+    "flask",
+]
