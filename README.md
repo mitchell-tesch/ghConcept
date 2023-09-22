@@ -19,7 +19,7 @@
 </div>
 
 ### Description
-Hops server hosted Grasshopper components for use with the RAM Concept CE Version 9 Update 4 API.
+Hops server hosted Grasshopper components for use with the RAM Concept 2023 API.
 
 
 #### Requirements

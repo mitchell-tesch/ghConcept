@@ -1,5 +1,6 @@
-import rhino3dm as rhino
 from gh_concept import hs, hops
+import rhino3dm as rhino
+from gh_concept.rhino import geometry as rhino_geo
 from gh_concept.concept import (model as concept_model,
                                 geometry as concept_geo,
                                 add_structure as concept_add_struct)
@@ -19,7 +20,7 @@ from gh_concept.concept import (model as concept_model,
         hs.HopsString("Concept model", "Model",
                       "File path of RAM Concept model",
                       hs.HopsParamAccess.ITEM),
-        hs.HopsCurve("Wall polyline", "Wall",
+        hs.HopsCurve("Wall polyline", "WallLine",
                      "Polyline of wall as list",
                      hs.HopsParamAccess.LIST),
         hs.HopsString("Wall Name", "Name",
@@ -51,19 +52,40 @@ from gh_concept.concept import (model as concept_model,
                        hs.HopsParamAccess.LIST),
         ],
     outputs=[])
-def add_wall(push: bool, model_file: str, wall_lines: list[rhino.PolylineCurve], name: list[str],
+def add_wall(push: bool, model_file: str, line: list[rhino.PolylineCurve], name: list[str],
              below_slab: list[bool], thickness: list[float], material: list[str], height: list[float],
-             compressible: list[bool], fixed_near: list[bool], fixed_far: list[bool], shear: list[bool]):
+             compressible: list[bool], fixed_near: list[bool], fixed_far: list[bool], shear_wall: list[bool]):
     if push:
-        # open Concept model and extract set api units and sings
-        concept, model = concept_model.open_concept_model(model_file)
-        file_units, file_signs = concept_model.set_api_units_signs(model)
-        # establish Concept location from Rhino point
-        for i, wall_polyline in enumerate(wall_lines):
-            wall_polyline: rhino.PolylineCurve
-            wall_segments = concept_geo.lines_from_polyline(wall_polyline)
-            concept_add_struct.add_wall(model, wall_segments, name[i], below_slab[i], height[i], compressible[i],
-                                        fixed_near[i], fixed_far[i], shear[i], material[i], thickness[i])
-        # restore user units and save and close Concept
-        concept_model.restore_file_units_signs(model, file_units, file_signs)
-        concept_model.save_close_concept(concept, model, model_file)
+        logger = []
+        # verify valid wall locations and translate to Concept Line Segments
+        valid_walls = []
+        for i, wall_line in enumerate(line):
+            valid, log = rhino_geo.check_polyline_validity(wall_line, i)
+            logger.extend(log)
+            if valid:
+                # store valid
+                valid_walls.append({"line_segments": concept_geo.lines_from_polyline(wall_line),
+                                    "name": name[i] if i < len(name) else None,
+                                    "below_slab": below_slab[i] if i < len(below_slab) else None,
+                                    "height": height[i] if i < len(height) else None,
+                                    "compressible": compressible[i] if i < len(compressible) else None,
+                                    "fixed_near": fixed_near[i] if i < len(fixed_near) else None,
+                                    "fixed_far": fixed_far[i] if i < len(fixed_far) else None,
+                                    "shear_wall": shear_wall[i] if i < len(shear_wall) else None,
+                                    "material": material[i] if i < len(material) else None,
+                                    "thickness": thickness[i] if i < len(thickness) else None,
+                                    })
+        if valid_walls:
+            # open Concept model and extract set api units and sings
+            concept, model = concept_model.open_concept_model(model_file)
+            file_units, file_signs = concept_model.set_api_units_signs(model)
+            # add line segments as walls
+            for wall in valid_walls:
+                concept_add_struct.add_wall(model, **wall)
+            # restore user units and save and close Concept
+            concept_model.restore_file_units_signs(model, file_units, file_signs)
+            concept_model.save_close_concept(concept, model, model_file)
+            logger.append(f"{len(valid_walls)} walls pushed.")
+        else:
+            logger.append(f"No valid walls provided.")
+        return logger

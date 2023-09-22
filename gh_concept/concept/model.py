@@ -10,7 +10,8 @@ def open_concept_model(file_path) -> tuple[Concept, Model]:
     concept_log = os.path.join(local_folder, f"ConceptAPI_{datetime.now().strftime('%Y%m%dT%H%M')}.log")
     concept = Concept.start_concept(headless=False, log_file_path=concept_log)
     model = concept.open_file(file_path)
-    return (concept, model)
+    return concept, model
+
 
 def set_api_units_signs(model: Model) -> tuple[str, str]:
     # store file units and set standard
@@ -21,9 +22,11 @@ def set_api_units_signs(model: Model) -> tuple[str, str]:
     model.signs.set_positive_signs()
     return file_units, file_signs
 
+
 def restore_file_units_signs(model: Model, file_units, file_signs):
     model.units.set_units(file_units)
     model.signs.set_signs(file_signs)
+
 
 def save_close_concept(concept: Concept, model: Model, file_path):
     model.save_file(file_path)
