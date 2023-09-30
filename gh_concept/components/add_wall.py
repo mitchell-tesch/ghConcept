@@ -25,7 +25,7 @@ from gh_concept.concept import (model as concept_model,
                      hs.HopsParamAccess.LIST),
         hs.HopsString("Wall Name", "Name",
                       "Name of wall as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Below slab?", "Below?",
                        "Is wall below slab as list",
                        hs.HopsParamAccess.LIST),
@@ -34,22 +34,22 @@ from gh_concept.concept import (model as concept_model,
                       hs.HopsParamAccess.LIST),
         hs.HopsString("Concrete material name", "Concrete",
                       "Concept concrete material name as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsNumber("Wall height", "Height",
                       "Height of wall as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Compressible?", "Compress?",
                        "Is wall compressible as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Fixed near?", "FixNear?",
                        "Is wall fixed near as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Fixed far?", "FixFar?",
                        "Is wall fixed far as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Shear wall?", "Shear?",
                        "Is wall a shear wall as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         ],
     outputs=[])
 def add_wall(push: bool, model_file: str, line: list[rhino.PolylineCurve], name: list[str],
@@ -76,7 +76,7 @@ def add_wall(push: bool, model_file: str, line: list[rhino.PolylineCurve], name:
                                     "thickness": thickness[i] if i < len(thickness) else None,
                                     })
         if valid_walls:
-            # open Concept model and extract set api units and sings
+            # open Concept model and extract set api units and signs
             concept, model = concept_model.open_concept_model(model_file)
             file_units, file_signs = concept_model.set_api_units_signs(model)
             # add line segments as walls

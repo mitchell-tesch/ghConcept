@@ -25,29 +25,29 @@ from gh_concept.concept import (model as concept_model,
                      hs.HopsParamAccess.LIST),
         hs.HopsString("Beam name", "Name",
                       "Name of beam as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsNumber("Beam thickness", "Thickness",
                       "Beam thickness as list",
                       hs.HopsParamAccess.LIST),
         hs.HopsNumber("Beam width", "Width",
-                      "Beam thickness as list",
+                      "Beam width as list",
                       hs.HopsParamAccess.LIST),
         hs.HopsNumber("Top of concrete", "TopLevel",
                       "Relative top of concrete as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsInteger("Priority", "Priority",
                        "Priority of beam as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         hs.HopsString("Analysis behaviour", "Behaviour",
                       "Beam analysis behaviour as list\n\
                           (custom, no-torsion two-way slab, two-way slab)",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsString("Concrete material name", "Concrete",
                       "Concept concrete material name as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsBoolean("Mesh as slab?", "Mesh?",
                        "Mesh beam as slab as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         ],
     outputs=[hs.HopsString("Push log", "Log",
                            "Log of Concept push"),
@@ -75,7 +75,7 @@ def add_beam(push: bool, model_file: str, line: list[rhino.PolylineCurve], name:
                                     "mesh_as_slab": mesh_as_slab[i] if i < len(mesh_as_slab) else None,
                                     })
         if valid_beams:
-            # open Concept model and extract set api units and sings
+            # open Concept model and extract set api units and signs
             concept, model = concept_model.open_concept_model(model_file)
             file_units, file_signs = concept_model.set_api_units_signs(model)
             # add line segments as beams

@@ -21,10 +21,15 @@ def lines_from_polyline(rhino_polyline: rhino.PolylineCurve) -> list[LineSegment
     :return: List of RAM Concept LineSegment2D
     """
     lines: list[LineSegment2D] = []
-    for point in range(0, rhino_polyline.PointCount - 1):
-        start_point = point_from_rhino_point(rhino_polyline.Point(point))
-        end_point = point_from_rhino_point(rhino_polyline.Point(point + 1))
-        lines.append(LineSegment2D(start_point, end_point))
+    if type(rhino_polyline) is rhino.LineCurve:
+        start_point = point_from_rhino_point(rhino_polyline.PointAtStart)
+        end_point = point_from_rhino_point(rhino_polyline.PointAtEnd)
+        lines = [LineSegment2D(start_point, end_point)]
+    else:
+        for point in range(0, rhino_polyline.PointCount - 1):
+            start_point = point_from_rhino_point(rhino_polyline.Point(point))
+            end_point = point_from_rhino_point(rhino_polyline.Point(point + 1))
+            lines.append(LineSegment2D(start_point, end_point))
     return lines
 
 

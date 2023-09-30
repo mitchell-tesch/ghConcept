@@ -25,10 +25,10 @@ from gh_concept.concept import (model as concept_model,
                      hs.HopsParamAccess.LIST),
         hs.HopsString("Opening name", "Name",
                       "Name of slab opening as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsInteger("Priority", "Priority",
                        "Priority of slab as list",
-                       hs.HopsParamAccess.LIST),
+                       hs.HopsParamAccess.LIST, True),
         ],
     outputs=[hs.HopsString("Push log", "Log",
                            "Log of Concept push"),
@@ -49,7 +49,7 @@ def add_slab_opening(push: bool, model_file: str, boundary: list[rhino.PolylineC
                                        "priority": priority[i] if i < len(priority) else None,
                                        })
         if valid_openings:
-            # open Concept model and extract set api units and sings
+            # open Concept model and extract set api units and signs
             concept, model = concept_model.open_concept_model(model_file)
             file_units, file_signs = concept_model.set_api_units_signs(model)
             # add polygons as slab openings

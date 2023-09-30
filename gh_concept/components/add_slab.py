@@ -25,7 +25,7 @@ from gh_concept.concept import (model as concept_model,
                      hs.HopsParamAccess.LIST),
         hs.HopsString("Slab name", "Name",
                       "Name of slab area as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsNumber("Slab thickness", "Thickness",
                       "Slab thickness as list",
                       hs.HopsParamAccess.LIST),
@@ -38,13 +38,13 @@ from gh_concept.concept import (model as concept_model,
         hs.HopsString("Analysis behaviour", "Behaviour",
                       "Slab analysis behaviour as list\n\
                           (custom, no-torsion two-way slab, one-way slab, two-way slab)",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsString("Concrete material name", "Concrete",
                       "Concept concrete material name as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         hs.HopsNumber("Axis angle", "AxisAngle",
                       "Axis rotation angle (deg) as list",
-                      hs.HopsParamAccess.LIST),
+                      hs.HopsParamAccess.LIST, True),
         ],
     outputs=[hs.HopsString("Push log", "Log",
                            "Log of Concept push"),
@@ -71,7 +71,7 @@ def add_slab(push: bool, model_file: str, boundary: list[rhino.PolylineCurve], n
                                     "axis_angle": axis_angle[i] if i < len(axis_angle) else None,
                                     })
         if valid_areas:
-            # open Concept model and extract set api units and sings
+            # open Concept model and extract set api units and signs
             concept, model = concept_model.open_concept_model(model_file)
             file_units, file_signs = concept_model.set_api_units_signs(model)
             # add polygons as slab areas
