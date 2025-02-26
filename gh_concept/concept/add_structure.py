@@ -8,9 +8,17 @@ from ram_concept.slab_area import SlabAreaBehavior
 from ram_concept.beam import BeamBehavior
 
 
-def add_slab_area(model: Model, polygon: Polygon2D, name: Union[str, None], thickness: Union[float, None],
-                  top_of_concrete: Union[float, None], priority: Union[int, None], behaviour: Union[str, None],
-                  material: Union[str, None], axis_angle: Union[float, None]):
+def add_slab_area(
+    model: Model,
+    polygon: Polygon2D,
+    name: Union[str, None],
+    thickness: Union[float, None],
+    top_of_concrete: Union[float, None],
+    priority: Union[int, None],
+    behaviour: Union[str, None],
+    material: Union[str, None],
+    axis_angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add slab area
@@ -33,7 +41,9 @@ def add_slab_area(model: Model, polygon: Polygon2D, name: Union[str, None], thic
     # TODO add stiffness modifiers for custom slab areas
 
 
-def add_slab_opening(model: Model, polygon: Polygon2D, name: Union[str, None], priority: Union[int, None]):
+def add_slab_opening(
+    model: Model, polygon: Polygon2D, name: Union[str, None], priority: Union[int, None]
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add slab opening
@@ -45,11 +55,22 @@ def add_slab_opening(model: Model, polygon: Polygon2D, name: Union[str, None], p
         slab_opening.priority = priority
 
 
-def add_column(model: Model, location: Point2D, name: Union[str, None], below_slab: Union[bool, None],
-               height: Union[float, None], compressible: Union[bool, None], fixed_near: Union[bool, None],
-               fixed_far: Union[bool, None], roller: Union[bool, None], material: Union[str, None],
-               i_factor: Union[float, None], depth: Union[float, None], breadth: Union[float, None],
-               angle: Union[float, None]):
+def add_column(
+    model: Model,
+    location: Point2D,
+    name: Union[str, None],
+    below_slab: Union[bool, None],
+    height: Union[float, None],
+    compressible: Union[bool, None],
+    fixed_near: Union[bool, None],
+    fixed_far: Union[bool, None],
+    roller: Union[bool, None],
+    material: Union[str, None],
+    i_factor: Union[float, None],
+    depth: Union[float, None],
+    breadth: Union[float, None],
+    angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add column
@@ -81,10 +102,19 @@ def add_column(model: Model, location: Point2D, name: Union[str, None], below_sl
         column.angle = angle
 
 
-def add_wall(model: Model, line_segments: list[LineSegment2D], name: Union[str, None], below_slab: Union[bool, None],
-             height: Union[float, None], compressible: Union[bool, None], fixed_near: Union[bool, None],
-             fixed_far: Union[bool, None], shear_wall: Union[bool, None], material: Union[str, None],
-             thickness: Union[float, None]):
+def add_wall(
+    model: Model,
+    line_segments: list[LineSegment2D],
+    name: Union[str, None],
+    below_slab: Union[bool, None],
+    height: Union[float, None],
+    compressible: Union[bool, None],
+    fixed_near: Union[bool, None],
+    fixed_far: Union[bool, None],
+    shear_wall: Union[bool, None],
+    material: Union[str, None],
+    thickness: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add wall segments
@@ -111,9 +141,18 @@ def add_wall(model: Model, line_segments: list[LineSegment2D], name: Union[str, 
             wall.thickness = thickness
 
 
-def add_beam(model: Model, line_segments: list[LineSegment2D], name: Union[str, None], thickness: Union[float, None],
-             width: Union[float, None], top_of_concrete: Union[float, None], priority: Union[int, None],
-             behaviour: Union[str, None], material: Union[str, None], mesh_as_slab: Union[bool, None]):
+def add_beam(
+    model: Model,
+    line_segments: list[LineSegment2D],
+    name: Union[str, None],
+    thickness: Union[float, None],
+    width: Union[float, None],
+    top_of_concrete: Union[float, None],
+    priority: Union[int, None],
+    behaviour: Union[str, None],
+    material: Union[str, None],
+    mesh_as_slab: Union[bool, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add beam segments
@@ -139,9 +178,18 @@ def add_beam(model: Model, line_segments: list[LineSegment2D], name: Union[str, 
     # TODO add stiffness modifiers for custom beams
 
 
-def add_point_support(model: Model, location: Point2D, name: Union[str, None], elevation: Union[float, None],
-                      Fr: Union[bool, None], Fs: Union[bool, None], Fz: Union[bool, None],
-                      Mr: Union[bool, None], Ms: Union[bool, None], angle: Union[float, None]):
+def add_point_support(
+    model: Model,
+    location: Point2D,
+    name: Union[str, None],
+    elevation: Union[float, None],
+    Fr: Union[bool, None],
+    Fs: Union[bool, None],
+    Fz: Union[bool, None],
+    Mr: Union[bool, None],
+    Ms: Union[bool, None],
+    angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add point support
@@ -165,9 +213,18 @@ def add_point_support(model: Model, location: Point2D, name: Union[str, None], e
         support.angle = angle
 
 
-def add_point_spring(model: Model, location: Point2D, name: Union[str, None], elevation: Union[float, None],
-                     kFr: Union[float, None], kFs: Union[float, None], kFz: Union[float, None],
-                     kMr: Union[float, None], kMs: Union[float, None], angle: Union[float, None]):
+def add_point_spring(
+    model: Model,
+    location: Point2D,
+    name: Union[str, None],
+    elevation: Union[float, None],
+    kFr: Union[float, None],
+    kFs: Union[float, None],
+    kFz: Union[float, None],
+    kMr: Union[float, None],
+    kMs: Union[float, None],
+    angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add point spring
@@ -191,10 +248,17 @@ def add_point_spring(model: Model, location: Point2D, name: Union[str, None], el
         spring.angle = angle
 
 
-def add_line_support(model: Model, line_segments: list[LineSegment2D], name: Union[str, None],
-                     elevation: Union[float, None],
-                     Fr: Union[bool, None], Fs: Union[bool, None], Fz: Union[bool, None],
-                     Mr: Union[bool, None], Ms: Union[bool, None]):
+def add_line_support(
+    model: Model,
+    line_segments: list[LineSegment2D],
+    name: Union[str, None],
+    elevation: Union[float, None],
+    Fr: Union[bool, None],
+    Fs: Union[bool, None],
+    Fz: Union[bool, None],
+    Mr: Union[bool, None],
+    Ms: Union[bool, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add line segments support
@@ -217,13 +281,23 @@ def add_line_support(model: Model, line_segments: list[LineSegment2D], name: Uni
             line_support.Ms = Ms
 
 
-def add_line_spring(model: Model, line_segments: list[LineSegment2D], name: Union[str, None],
-                    elevation: Union[float, None],
-                    kFr0: Union[float, None], kFs0: Union[float, None], kFz0: Union[float, None],
-                    kMr0: Union[float, None], kMs0: Union[float, None],
-                    kFr1: Union[float, None], kFs1: Union[float, None], kFz1: Union[float, None],
-                    kMr1: Union[float, None], kMs1: Union[float, None],
-                    angle: Union[float, None]):
+def add_line_spring(
+    model: Model,
+    line_segments: list[LineSegment2D],
+    name: Union[str, None],
+    elevation: Union[float, None],
+    kFr0: Union[float, None],
+    kFs0: Union[float, None],
+    kFz0: Union[float, None],
+    kMr0: Union[float, None],
+    kMs0: Union[float, None],
+    kFr1: Union[float, None],
+    kFs1: Union[float, None],
+    kFz1: Union[float, None],
+    kMr1: Union[float, None],
+    kMs1: Union[float, None],
+    angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add line segments spring
@@ -260,14 +334,28 @@ def add_line_spring(model: Model, line_segments: list[LineSegment2D], name: Unio
             line_spring.kMs1 = kMs1
 
 
-def add_area_spring(model: Model, polygon: Polygon2D, name: Union[str, None], elevation: Union[float, None],
-                    kFr0: Union[float, None], kFs0: Union[float, None], kFz0: Union[float, None],
-                    kMr0: Union[float, None], kMs0: Union[float, None],
-                    kFr1: Union[float, None], kFs1: Union[float, None], kFz1: Union[float, None],
-                    kMr1: Union[float, None], kMs1: Union[float, None],
-                    kFr2: Union[float, None], kFs2: Union[float, None], kFz2: Union[float, None],
-                    kMr2: Union[float, None], kMs2: Union[float, None],
-                    angle: Union[float, None]):
+def add_area_spring(
+    model: Model,
+    polygon: Polygon2D,
+    name: Union[str, None],
+    elevation: Union[float, None],
+    kFr0: Union[float, None],
+    kFs0: Union[float, None],
+    kFz0: Union[float, None],
+    kMr0: Union[float, None],
+    kMs0: Union[float, None],
+    kFr1: Union[float, None],
+    kFs1: Union[float, None],
+    kFz1: Union[float, None],
+    kMr1: Union[float, None],
+    kMs1: Union[float, None],
+    kFr2: Union[float, None],
+    kFs2: Union[float, None],
+    kFz2: Union[float, None],
+    kMr2: Union[float, None],
+    kMs2: Union[float, None],
+    angle: Union[float, None],
+):
     # cad layer
     structure_layer: StructureLayer = model.cad_manager.structure_layer
     # add area spring

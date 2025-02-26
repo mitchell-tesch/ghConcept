@@ -43,4 +43,3 @@ def polygon_from_polyline(rhino_polyline: rhino.PolylineCurve) -> Polygon2D:
     for p in range(0, rhino_polyline.PointCount - 1):
         points.append(point_from_rhino_point(rhino_polyline.Point(p)))
     return Polygon2D(points)
-    

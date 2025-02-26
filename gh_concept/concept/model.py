@@ -7,7 +7,9 @@ import os
 
 def open_concept_model(file_path) -> tuple[Concept, Model]:
     local_folder = os.path.dirname(file_path)
-    concept_log = os.path.join(local_folder, f"ConceptAPI_{datetime.now().strftime('%Y%m%dT%H%M')}.log")
+    concept_log = os.path.join(
+        local_folder, f"ConceptAPI_{datetime.now().strftime('%Y%m%dT%H%M')}.log"
+    )
     concept = Concept.start_concept(headless=False, log_file_path=concept_log)
     model = concept.open_file(file_path)
     return concept, model

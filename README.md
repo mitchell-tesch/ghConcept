@@ -19,11 +19,11 @@
 </div>
 
 ### Description
-Hops server hosted Grasshopper components for use with the RAM Concept 2023 API.
+Hops server hosted Grasshopper components for use with the RAM Concept 2024 API.
 
 
 #### Requirements
- - Python 3.10
+ - Python 3.12
  - Flask
  - ghhops_server
  - Rhino3dm

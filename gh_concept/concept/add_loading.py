@@ -20,14 +20,28 @@ def add_loading_layer(model: Model, layer_name: str, layer_type: str):
         cad_manager.add_load_combo_layer(layer_name)
 
 
-def add_area_load(model: Model, layer_name: str, polygon: Polygon2D, name: Union[str, None],
-                  elevation: Union[float, None],
-                  Fx0: Union[float, None], Fy0: Union[float, None], Fz0: Union[float, None], Mx0: Union[float, None],
-                  My0: Union[float, None],
-                  Fx1: Union[float, None], Fy1: Union[float, None], Fz1: Union[float, None], Mx1: Union[float, None],
-                  My1: Union[float, None],
-                  Fx2: Union[float, None], Fy2: Union[float, None], Fz2: Union[float, None], Mx2: Union[float, None],
-                  My2: Union[float, None]):
+def add_area_load(
+    model: Model,
+    layer_name: str,
+    polygon: Polygon2D,
+    name: Union[str, None],
+    elevation: Union[float, None],
+    Fx0: Union[float, None],
+    Fy0: Union[float, None],
+    Fz0: Union[float, None],
+    Mx0: Union[float, None],
+    My0: Union[float, None],
+    Fx1: Union[float, None],
+    Fy1: Union[float, None],
+    Fz1: Union[float, None],
+    Mx1: Union[float, None],
+    My1: Union[float, None],
+    Fx2: Union[float, None],
+    Fy2: Union[float, None],
+    Fz2: Union[float, None],
+    Mx2: Union[float, None],
+    My2: Union[float, None],
+):
     # cad layer
     loading_layer: ForceLoadingLayer = model.cad_manager.force_loading_layer(layer_name)
     load_area = loading_layer.add_area_load(polygon)
@@ -46,7 +60,7 @@ def add_area_load(model: Model, layer_name: str, polygon: Polygon2D, name: Union
     if Mx0 is not None:
         load_area.Mx0 = Mx0
     if My0 is not None:
-        load_area.My0  = My0
+        load_area.My0 = My0
     # point 2 loading values
     if Fx1 is not None:
         load_area.Fx1 = Fx1
@@ -57,7 +71,7 @@ def add_area_load(model: Model, layer_name: str, polygon: Polygon2D, name: Union
     if Mx1 is not None:
         load_area.Mx1 = Mx1
     if My1 is not None:
-        load_area.My1  = My1
+        load_area.My1 = My1
     # point 3 loading values
     if Fx2 is not None:
         load_area.Fx2 = Fx2
@@ -68,15 +82,26 @@ def add_area_load(model: Model, layer_name: str, polygon: Polygon2D, name: Union
     if Mx2 is not None:
         load_area.Mx2 = Mx2
     if My2 is not None:
-        load_area.My2  = My2
+        load_area.My2 = My2
 
 
-def add_line_load(model: Model, layer_name: str, line_segments: list[LineSegment2D], name: Union[str, None],
-                  elevation: Union[float, None],
-                  Fx0: Union[float, None], Fy0: Union[float, None], Fz0: Union[float, None], Mx0: Union[float, None],
-                  My0: Union[float, None],
-                  Fx1: Union[float, None], Fy1: Union[float, None], Fz1: Union[float, None], Mx1: Union[float, None],
-                  My1: Union[float, None]):
+def add_line_load(
+    model: Model,
+    layer_name: str,
+    line_segments: list[LineSegment2D],
+    name: Union[str, None],
+    elevation: Union[float, None],
+    Fx0: Union[float, None],
+    Fy0: Union[float, None],
+    Fz0: Union[float, None],
+    Mx0: Union[float, None],
+    My0: Union[float, None],
+    Fx1: Union[float, None],
+    Fy1: Union[float, None],
+    Fz1: Union[float, None],
+    Mx1: Union[float, None],
+    My1: Union[float, None],
+):
     # cad layer
     loading_layer: ForceLoadingLayer = model.cad_manager.force_loading_layer(layer_name)
     # add line load segments
@@ -111,10 +136,18 @@ def add_line_load(model: Model, layer_name: str, line_segments: list[LineSegment
             load_line.My1 = My1
 
 
-def add_point_load(model: Model, layer_name: str, location: Point2D, name: Union[str, None],
-                   elevation: Union[float, None],
-                   Fx: Union[float, None], Fy: Union[float, None], Fz: Union[float, None], Mx: Union[float, None],
-                   My: Union[float, None]):
+def add_point_load(
+    model: Model,
+    layer_name: str,
+    location: Point2D,
+    name: Union[str, None],
+    elevation: Union[float, None],
+    Fx: Union[float, None],
+    Fy: Union[float, None],
+    Fz: Union[float, None],
+    Mx: Union[float, None],
+    My: Union[float, None],
+):
     # cad layer
     loading_layer: ForceLoadingLayer = model.cad_manager.force_loading_layer(layer_name)
     # add point load

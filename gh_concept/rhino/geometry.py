@@ -1,7 +1,9 @@
 import rhino3dm as rhino
 
 
-def check_boundary_validity(boundary: rhino.PolylineCurve, index: int = 0) -> tuple[bool, list[str]]:
+def check_boundary_validity(
+    boundary: rhino.PolylineCurve, index: int = 0
+) -> tuple[bool, list[str]]:
     problems = []
     valid = True
     if not boundary.IsValid:
@@ -19,7 +21,9 @@ def check_boundary_validity(boundary: rhino.PolylineCurve, index: int = 0) -> tu
     return valid, problems
 
 
-def check_polyline_validity(polyline: rhino.PolylineCurve, index: int = 0) -> tuple[bool, list[str]]:
+def check_polyline_validity(
+    polyline: rhino.PolylineCurve, index: int = 0
+) -> tuple[bool, list[str]]:
     problems = []
     valid = True
     if not polyline.IsValid:
